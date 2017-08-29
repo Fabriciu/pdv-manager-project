@@ -1,9 +1,9 @@
-var express = require('express'),
-    app = express(),
-    port = process.env.PORT || 3001,
-    mongoose = require('mongoose'),
-    Pdv = require('./api/model/pdvModel'),
-    bodyParser = require('body-parser');
+var express     = require('express'),
+    app         = express(),
+    port        = process.env.PORT || 3001,
+    mongoose    = require('mongoose'),
+    Pdv         = require('./api/model/pdvModel'),
+    bodyParser  = require('body-parser');
 
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost/pdv_db', { useMongoClient: true });
