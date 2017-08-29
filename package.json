@@ -1,0 +1,23 @@
+{
+  "name": "pdv-manager-project",
+  "version": "1.0.0",
+  "description": "REST API Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Fabricio Borgatto - fabricio.borgatto@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.9",
+    "mongoose-geojson-schema": "^2.1.2"
+  }
+}
