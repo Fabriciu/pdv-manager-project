@@ -15,4 +15,7 @@ module.exports = function(app) {
     app.route('/pdv/:pdvID')
         .get(pdvController.findById);
 
+    app.route('*')
+        .get(pdvController.loadHome);
+
 };

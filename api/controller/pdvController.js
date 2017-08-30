@@ -77,6 +77,9 @@ exports.findByAddressAndCoverage = function(req, res) {
     });
 };
 
+exports.loadHome = function(req, res) {
+    res.sendFile(path.resolve(__dirname + '../public/index.html'));
+};
 
 /* exports.findByAddressAndCoverage = function(req, res) {
     var coords = {coordinates:[parseFloat(req.query.longitude),parseFloat(req.query.latitude)],type:'Point'};
