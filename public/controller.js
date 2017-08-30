@@ -27,7 +27,9 @@ function mainController($scope, $http) {
                 }
             })
                 .success(function (data) {
-                    $scope.pdv = data;
+                    if(!data.includes('Error searching PDV')) {
+                        $scope.pdv = data;
+                    }
                     console.log('Search finished: ' + data);
                 })
                 .error(function (data) {
