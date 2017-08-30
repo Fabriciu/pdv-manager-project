@@ -8,29 +8,29 @@ var Schema = mongoose.Schema;
  * Creates a new pdv database schema
  */
 var PdvSchema = new Schema({
-    id: { 
+    id: {
         type: String,
         required: true,
         index: true
     },
-    tradingName: { 
+    tradingName: {
         type: String,
         required: true
     },
-    ownerName: { 
+    ownerName: {
         type: String,
         required: true
     },
-    document: { 
-        type: String, 
+    document: {
+        type: String,
         unique: true,
         required: true
     },
-    coverageArea: mongoose.Schema.Types.MultiPolygon,
-    address: mongoose.Schema.Types.Point
+    coverageArea: { type: mongoose.Schema.Types.MultiPolygon, required: true },
+    address: { type: mongoose.Schema.Types.Point, required: true }
 });
 
-PdvSchema.index({address: '2d'});
-PdvSchema.index({coverageArea: '2dsphere'});
+PdvSchema.index({ address: '2d' });
+PdvSchema.index({ coverageArea: '2dsphere' });
 
 module.exports = mongoose.model('Pdv', PdvSchema);

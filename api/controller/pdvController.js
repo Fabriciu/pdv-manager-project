@@ -1,60 +1,51 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Pdv = mongoose.model('Pdv'),
-    fs = require('fs'),
-    path = require('path'),
-    jsonfile = require('jsonfile');
+var mongoose = require('mongoose');
+var Pdv = mongoose.model('Pdv');
+var fs = require('fs');
+var path = require('path');
 
-exports.add = function(req, res) {
+exports.add = function (req, res) {
     //create new pdv parsing body request payload
     var newPdv = new Pdv(req.body);
-    newPdv.save(function(err, pdv) {
-        if(err) {
-            console.log(err);
-            res.send(err);
+    newPdv.save(function (err, pdv) {
+        if (err) {
+            console.log('Error inserting PDV: ' + err);
+            res.send('Error inserting PDV: ' + err);
+        } else {
+            console.log('PDV successfuly added: ' + pdv);
+            res.send('PDV successfuly added: ' + pdv);
         }
-        res.json(pdv);
     });
 };
 
-exports.addPdvsBatch = function(req, res) {
-    var obj;
-    var jsonFile = path.join(__dirname, '..', '..', 'data', 'pdvs.json');
-    console.dir(jsonfile.readFileSync(jsonFile));
-    res.send();
-    /* fs.exists(jsonFile, function(exists) {
-        if(exists) {
-            console.log('File found');
-            fs.readFileSync(jsonFile, 'utf-8', function(err, data) {
-                if(err) {
-                    throw err;
+/**
+ * TODO Load PDVs by .json file
+ */
+
+exports.findById = function (req, res) {
+    if (!isNaN(req.params.pdvID)) {
+        Pdv.find({ id: req.params.pdvID })
+            .select(['-_id', '-__v'])
+            .exec(function (err, pdv) {
+                if (err) {
+                    console.log('Error searching PDV: ' + err);
+                    res.send(err);
                 }
-        //obj = JSON.parse(data);
-                console.log(data);
-            })
-        }
+                if (undefined != pdv) {
+                    console.log('PDV found by id: ' + pdv);
+                    res.send(pdv[0]);
+                } else {
+                    console.log('PDV not found by id');
+                }
+            });
     }
-    ); */
 };
 
-exports.findById = function(req, res) {
-    Pdv.findOne({id: req.params.pdvID})
-    .select(['-_id', '-__v'])
-    .exec(function(err, pdv) {
-        if(err) {
-            res.send(err);
-        }
-        if(undefined != pdv) {
-            res.send(pdv);
-        }
-    });
-};
-
-exports.findByAddressAndCoverage = function(req, res) {
-    var coords = {coordinates:[parseFloat(req.query.longitude),parseFloat(req.query.latitude)],type:'Point'};
+exports.findByAddressAndCoverage = function (req, res) {
+    var coords = { coordinates: [parseFloat(req.query.longitude), parseFloat(req.query.latitude)], type: 'Point' };
     console.log(coords);
-    Pdv.findOne({
+    Pdv.find({
         address: {
             $near: {
                 $geometry: coords
@@ -66,30 +57,22 @@ exports.findByAddressAndCoverage = function(req, res) {
             }
         }
     })
-    .select(['-_id', '-__v'])
-    .exec(function(err, pdv) {
-        if(err) {
-            res.send(err);
-        }
-        if(undefined != pdv) {
-            res.send(pdv);
-        }
-    });
+        .limit(1)
+        .select(['-_id', '-__v'])
+        .exec(function (err, pdv) {
+            if (err) {
+                console.log('Error searching PDV: ' + err);
+                res.send(err);
+            }
+            if (undefined != pdv) {
+                console.log('PDV found by address: ' + pdv);
+                res.send(pdv[0]);
+            } else {
+                console.log('PDV not found by address');
+            }
+        });
 };
 
-exports.loadHome = function(req, res) {
+exports.loadHome = function (req, res) {
     res.sendFile(path.resolve(__dirname + '../public/index.html'));
 };
-
-/* exports.findByAddressAndCoverage = function(req, res) {
-    var coords = {coordinates:[parseFloat(req.query.longitude),parseFloat(req.query.latitude)],type:'Point'};
-    console.log(coords);
-    Pdv.findOne({address: {$near:{$geometry:coords}}}).select(['-_id', '-__v']).exec(function(err, pdv) {
-        if(err) {
-            res.send(err);
-        }
-        if(undefined != pdv)
-            res.send(pdv);
-    });
-    
-}; */

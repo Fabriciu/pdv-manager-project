@@ -1,13 +1,15 @@
 'use strict';
 module.exports = function(app) {
     var pdvController   = require('../controller/pdvController');
-    var multer          = require('multer');
 
     app.route('/pdv')
         .post(pdvController.add);
 
-    app.route('/loadPdvsFile')
-        .post(pdvController.addPdvsBatch);
+/**
+ * TODO Load PDVs by .json file
+ */     
+    /* app.route('/loadPdvsFile')
+        .post(pdvController.addPdvsBatch); */
 
     app.route('/pdv?')
         .get(pdvController.findByAddressAndCoverage);
@@ -15,7 +17,7 @@ module.exports = function(app) {
     app.route('/pdv/:pdvID')
         .get(pdvController.findById);
 
-    app.route('*')
+    app.route('/index.html')
         .get(pdvController.loadHome);
 
 };
