@@ -43,34 +43,37 @@ exports.findById = function (req, res) {
 };
 
 exports.findByAddressAndCoverage = function (req, res) {
-    var coords = { coordinates: [parseFloat(req.query.longitude), parseFloat(req.query.latitude)], type: 'Point' };
-    console.log(coords);
-    Pdv.find({
-        address: {
-            $near: {
-                $geometry: coords
+    if (!isNaN(req.query.longitude) && !isNaN(req.query.latitude)) {
+        var coords = { coordinates: [parseFloat(req.query.longitude), parseFloat(req.query.latitude)], type: 'Point' };
+        console.log(coords);
+        Pdv.find({
+            address: {
+                $near: {
+                    $geometry: coords
+                }
+            },
+            coverageArea: {
+                $geoIntersects: {
+                    $geometry: coords
+                }
             }
-        },
-        coverageArea: {
-            $geoIntersects: {
-                $geometry: coords
-            }
-        }
-    })
-        .limit(1)
-        .select(['-_id', '-__v'])
-        .exec(function (err, pdv) {
-            if (err) {
-                console.log('Error searching PDV: ' + err);
-                res.send(err);
-            }
-            if (undefined != pdv) {
-                console.log('PDV found by address: ' + pdv);
-                res.send(pdv[0]);
-            } else {
-                console.log('PDV not found by address');
-            }
-        });
+        })
+            .limit(1)
+            .select(['-_id', '-__v'])
+            .exec(function (err, pdv) {
+                if (err) {
+                    console.log('Error searching PDV: ' + err);
+                    res.send(err);
+                }
+                if (undefined != pdv) {
+                    console.log('PDV found by address: ' + pdv[0]);
+                    res.send(pdv[0]);
+                } else {
+                    console.log('PDV not found by address');
+                    res.send('PDV not found by address');
+                }
+            });
+    }
 };
 
 exports.loadHome = function (req, res) {

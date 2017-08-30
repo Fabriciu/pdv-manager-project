@@ -30,7 +30,7 @@ var PdvSchema = new Schema({
     address: { type: mongoose.Schema.Types.Point, required: true }
 });
 
-PdvSchema.index({ address: '2d' });
+PdvSchema.index({ address: '2dsphere' });
 PdvSchema.index({ coverageArea: '2dsphere' });
 
 module.exports = mongoose.model('Pdv', PdvSchema);

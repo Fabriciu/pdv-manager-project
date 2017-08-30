@@ -6,7 +6,7 @@ var Pdv = require('./api/model/pdvModel');
 var bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/pdv_db', { useMongoClient: true });
+mongoose.connect('mongodb://mongo/pdv_db_1', { useMongoClient: true });
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());

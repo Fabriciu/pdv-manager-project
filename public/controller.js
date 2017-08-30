@@ -6,7 +6,7 @@ function mainController($scope, $http) {
     $scope.showPdvAlert = false;
 
     $scope.findById = function (pdvId) {
-        if (isDefined(pdvId)) {
+        if (!isNaN(parseInt(pdvId))) {
             $http.get('/pdv/' + pdvId)
                 .success(function (data) {
                     $scope.pdv = data;
@@ -19,30 +19,29 @@ function mainController($scope, $http) {
     };
 
     $scope.findByAddressAndCoverage = function () {
-        if (isDefined($scope.queryParameters)) {
-            $http.get('/pdv?', {
-                params: {
-                    latitude: $scope.queryParameters.latitude,
-                    longitude: $scope.queryParameters.longitude
-                }
-            })
-                .success(function (data) {
-                    if(!data.includes('Error searching PDV')) {
-                        $scope.pdv = data;
+        if (undefined != $scope.queryParameters)
+            if (!isNaN(parseInt($scope.queryParameters.longitude)) && !isNaN(parseInt($scope.queryParameters.latitude))) {
+                $http.get('/pdv?', {
+                    params: {
+                        longitude: $scope.queryParameters.longitude,
+                        latitude: $scope.queryParameters.latitude
                     }
-                    console.log('Search finished: ' + data);
                 })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });
-        }
+                    .success(function (data) {
+                        $scope.pdv = data;
+                        console.log('Search finished: ' + data);
+                    })
+                    .error(function (data) {
+                        console.log('Error: ' + data);
+                    });
+            }
     };
 
     $scope.addPdv = function () {
         $http.post('/pdv', $scope.inputPdvJSON)
             .success(function (data) {
                 //$scope.pdv = data;
-                if(!data.includes('Error inserting PDV')) {
+                if (!data.includes('Error inserting PDV')) {
                     $scope.showPdvSuccess = true;
                     $scope.showPdvAlert = false;
                     console.log('New Pdv added: ' + data);
