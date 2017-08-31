@@ -24,22 +24,21 @@ exports.add = function (req, res) {
  */
 
 exports.findById = function (req, res) {
-    if (!isNaN(req.params.pdvID)) {
-        Pdv.find({ id: req.params.pdvID })
-            .select(['-_id', '-__v'])
-            .exec(function (err, pdv) {
-                if (err) {
-                    console.log('Error searching PDV: ' + err);
-                    res.send(err);
-                }
-                if (undefined != pdv) {
-                    console.log('PDV found by id: ' + pdv);
-                    res.send(pdv[0]);
-                } else {
-                    console.log('PDV not found by id');
-                }
-            });
-    }
+    Pdv.find({ id: req.params.pdvID })
+        .select(['-_id', '-__v'])
+        .exec(function (err, pdv) {
+            if (err) {
+                console.log('Error searching PDV: ' + err);
+                res.send(err);
+            }
+            if (undefined != pdv) {
+                console.log('PDV found by id: ' + pdv);
+                res.send(pdv[0]);
+            } else {
+                console.log('PDV not found by id');
+            }
+        });
+
 };
 
 exports.findByAddressAndCoverage = function (req, res) {
