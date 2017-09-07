@@ -1,64 +1,66 @@
 # pdv-manager-project
-Rest API Project for handling PDVs
+Rest API Project for PDV management
+
+PDV stands for Ponto de Venda (english POS: Point of Sale)
 
 
 ## Cadê o PDV?
-O projeto foi desenvolvido na plataforma MEAN e executa três tarefas:
+Cadê o PDV (en: Where is the POS?) is built on the MEAN platform and runs three tasks:
 
-1. Criar PDV
-2. Exibir um PDV específico a partir do seu id
-3. Buscar um PDV por sua localização e área de cobertura
+1. Create PDV
+2. Show a PDV by its id
+3. Find a PDV by its location and coverage area
 
 
-## Pré-requisitos
+## Requirements
 
 * [Docker](https://www.docker.com/community-edition)
 
 ## Deployment
-Execute o comando docker-compose up na raiz do projeto. O Docker instalará todas as dependências necessárias para rodar o projeto localmente.
+Run the command docker-compose up at the project source folder. Docker will install all dependencies needed to run the project locally.
 
 ```bash
 docker-compose up
 ```
 
-Após o Docker instalar as dependências, o ambiente já estará criado e pronto para uso.
+Finished installing the dependencies by Docker, the environment will be created and ready for use.
 
 
-### Não quero o Docker!
-Também é possível rodar o projeto sem o Docker instalado.
+### I don't want Docker!
+It is also possible to run without Docker.
 
-Para isso, é necessário instalar:
+Install:
 * [NodeJS](http://nodejs.org/)
 * [MongoDB](https://www.mongodb.com/download-center#community)
 
 
-Em seguida, altere o arquivo server.js para conectar-se ao mongo no ambiente local:
+Then, change the server.js file to connect to Mongo locally:
 
 ```
 mongoose.connect('mongodb://localhost/pdv_db_1', { useMongoClient: true });
 ```
 
-Finalmente, execute o comando `npm install` na raiz do projeto.
+Run the command `npm install` at the project source folder.
 
-Para rodar o projeto, execute o comando `npm run start`.
+Finally, run `npm run start`.
 
 
-## Execução
+## Usage
 
-### Acesso via navegador
-Para utilizar as funcionalidades do sistema, acesse, no navegador, a URL `http://localhost:3000/index.html`.
+### Via browser
+Use all features via browser, it is quite simple through the URL `http://localhost:3000/index.html`.
 
 
 ### APIs
-Estão disponíveis 3 APIs, sendo 1 para cada funcionalidade:
-#### Exibir PDV
+There are available 3 APIs, 1 for each feature:
+#### Show PDV
 ```
 GET http://localhost:3000/pdv/[pdvId]
 
 paramêtro: id do pdv
 ```
 
-#### Buscar PDV por localização
+#### Find PDV by its location
 ```
 GET http://localhost:3000/pdv?longitude=&latitude=
 
@@ -67,7 +69,7 @@ longitude (ex.: -38.3576)
 latitude (ex.: -15.18341)
 ```
 
-#### Adicionar PDV
+#### Add PDV
 ```
 POST http://localhost:3000/pdv
 
@@ -75,7 +77,7 @@ body:
 {"id":"37","tradingName":"Behoppy","ownerName":"Luiz Santo","document":"24.522.169/0001-70","coverageArea":{"type":"MultiPolygon","coordinates":[[[[-46.47211,-23.50572],[-46.54541,-23.51862],[-46.54841,-23.54711],[-46.53477,-23.57669],[-46.49906,-23.59502],[-46.45271,-23.54554],[-46.47211,-23.50572]]]]},"address":{"type":"Point","coordinates":[-46.516367,-23.549245]}}
 ```
 
-### Telas
+### Screenshots
 
 ![Tela Inicial](/screenshots/screen_inicial.png)
 
@@ -86,8 +88,8 @@ body:
 ![Tela Insercao](/screenshots/screen_insercao.png)
 
 
-## Desenvolvedor
+## Developer
 
 * **Fabrício Borgatto** - fabricio.borgatto@gmail.com
 
-Em caso de dúvidas, por gentileza, entre em contato ;)
+Please, contact me if anything doesn't work as expected ;)
