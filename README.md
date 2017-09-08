@@ -1,7 +1,7 @@
 # pdv-manager-project
 Rest API Project for PDV management
 
-PDV stands for Ponto de Venda (english POS: Point of Sale)
+PDV stands for Ponto de Venda (en: POS - Point of Sale)
 
 
 ## Cadê o PDV?
@@ -17,17 +17,17 @@ Cadê o PDV (en: Where is the POS?) is built on the MEAN platform and runs three
 * [Docker](https://www.docker.com/community-edition)
 
 ## Deployment
-Run the command docker-compose up at the project source folder. Docker will install all dependencies needed to run the project locally.
+Run the command `docker-compose up` at the project source folder. Docker will install all dependencies needed to run the project locally.
 
 ```bash
 docker-compose up
 ```
 
-Finished installing the dependencies by Docker, the environment will be created and ready for use.
+Finished installing the dependencies by Docker, the environment is created and ready for use.
 
 
 ### I don't want Docker!
-It is also possible to run without Docker.
+It is also possible running without Docker.
 
 Install:
 * [NodeJS](http://nodejs.org/)
