@@ -92,4 +92,4 @@ body:
 
 * **Fabrício Borgatto** - fabricio.borgatto@gmail.com
 
-Please, contact me if anything doesn't work as expected ;)
+Please, contact me if anything doesn't work as expected... or just for chatting ;)
