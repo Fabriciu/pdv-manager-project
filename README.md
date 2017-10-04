@@ -57,14 +57,14 @@ There are available 3 APIs, 1 for each feature:
 ```
 GET http://localhost:3000/pdv/[pdvId]
 
-paramêtro: id do pdv
+parameter: pdv id
 ```
 
 #### Find PDV by its location
 ```
 GET http://localhost:3000/pdv?longitude=&latitude=
 
-parâmetros: 
+parameters: 
 longitude (ex.: -38.3576)
 latitude (ex.: -15.18341)
 ```
