@@ -17,7 +17,7 @@ Cadê o PDV (en: Where is the POS?) is built on the MEAN platform and runs three
 * [Docker](https://www.docker.com/community-edition)
 
 ## Deployment
-Run the command `docker-compose up` at the project source folder. Docker will install all required dependencies to running the project locally.
+Run the command `docker-compose up` at the project source folder. Docker will install all required dependencies to run the project locally.
 
 ```bash
 docker-compose up
